@@ -1,0 +1,11 @@
+{%  extends 'chatbot/base.html' %}
+{%  block content %}
+    {%  if past %}
+        {% for ps in past %}
+            <strong>{{ ps.question }} </strong><br/>
+            {{ps.response}}<br/>
+            <a href="{% url 'delete_past' ps.id %}" class="btn btn-outline-secondary btn-sm">Delete</a><br/><br/>
+            <br/><br/>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

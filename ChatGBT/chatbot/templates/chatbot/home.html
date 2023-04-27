@@ -1,0 +1,49 @@
+{%  extends 'chatbot/base.html' %}
+{%  block content %}
+    <br/>
+    <div class="container">
+        {% if question %}
+            <h3>Question: {{ question }}</h3>
+            <br/>
+        {% endif %}
+        <div class="card">
+            <div class="card-header">
+                ChatGBT Response
+            </div>
+            <div class="card-body">
+                {%  if response %}
+                    {{ past_response|safe }}
+                {%  endif %}
+                <br/>
+                <br/>
+
+            </div>
+        </div>
+    <br/>
+    <br/>
+
+        <form method="post" action="{%  url 'home' %}">
+            {% csrf_token %}
+            {% if past_response %}
+                <div class="mb-3">
+                    <input type="hidden" name="past_response", value="{{ past_response }}">
+                </div>
+
+                <div class="mb-3">
+                    <input name="question" type="text" class="form-control" placeholder="Ask ChatGBT A Question">
+                </div>
+            {% else %}
+                <div class="mb-3">
+                    <input type="hidden" name="past_response", value="null">
+                </div>
+
+                <div class="mb-3">
+                    <input name="question" type="text" class="form-control" placeholder="Ask ChatGBT A Question">
+                </div>
+            {% endif %}
+            <button type="submit" class="btn btn-secondary">Submit</button>
+        </form>
+    </div>
+{% endblock %}
+
+
